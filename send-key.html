@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -31,9 +30,9 @@
 
   <script>
     const ref = document.referrer;
-    const expectedRef = "https://linkvertise.com/1338065/s333-macro-for-asura";
+    const allowedRef = "https://intermediare.vercel.app"; // <-- substitua pelo seu domínio intermediário se for outro
 
-    if (!ref || !ref.startsWith(expectedRef)) {
+    if (!ref || !ref.startsWith(allowedRef)) {
       window.location.href = "/";
     }
 
