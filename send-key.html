@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
+    /* Estilo igual ao original */
     * {
       margin: 0;
       padding: 0;
@@ -93,7 +94,7 @@
 
   <div class="copiado" id="copiado">Key copiada!</div>
 
-  <div class="card">
+  <div class="card" id="card">
     <img src="/Main logo.png" alt="Logo S333 HUBS" class="logo" />
     <h1>Sua key exclusiva chegou!</h1>
     <div class="key-box">
@@ -104,30 +105,44 @@
   </div>
 
   <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get("token");
     const keySpan = document.getElementById("your-key");
     const iconCopy = document.getElementById("copy-icon");
     const alertCopy = document.getElementById("copiado");
+    const card = document.getElementById("card");
 
-    fetch("https://script.google.com/macros/s/AKfycbyzXqI7BHsBgfH5KjlCSxlPoWBKoU7sKoVHL5HjkyqHMHH2prRmUunDRFlv4Wp955ww3g/exec")
-      .then(res => {
-        if (!res.ok) throw new Error("Erro ao gerar key");
-        return res.text();
-      })
-      .then(data => {
-        keySpan.textContent = data;
-      })
-      .catch(err => {
-        keySpan.textContent = "Erro ao gerar key";
-        console.error(err);
-      });
+    const tokenValido = "123abc"; // Você pode gerar esse no redirecionador
 
-    iconCopy.addEventListener("click", () => {
-      navigator.clipboard.writeText(keySpan.textContent)
-        .then(() => {
-          alertCopy.classList.add("show");
-          setTimeout(() => alertCopy.classList.remove("show"), 2000);
+    if (token !== tokenValido) {
+      // Bloqueia acesso
+      document.body.innerHTML = "<h2 style='color: white; text-align: center;'>Acesso negado</h2>";
+      setTimeout(() => {
+        window.location.href = "https://lokcis.vercel.app/";
+      }, 2000);
+    } else {
+      // Token válido → carregar key normalmente
+      fetch("https://script.google.com/macros/s/AKfycbyzXqI7BHsBgfH5KjlCSxlPoWBKoU7sKoVHL5HjkyqHMHH2prRmUunDRFlv4Wp955ww3g/exec")
+        .then(res => {
+          if (!res.ok) throw new Error("Erro ao gerar key");
+          return res.text();
+        })
+        .then(data => {
+          keySpan.textContent = data;
+        })
+        .catch(err => {
+          keySpan.textContent = "Erro ao gerar key";
+          console.error(err);
         });
-    });
+
+      iconCopy.addEventListener("click", () => {
+        navigator.clipboard.writeText(keySpan.textContent)
+          .then(() => {
+            alertCopy.classList.add("show");
+            setTimeout(() => alertCopy.classList.remove("show"), 2000);
+          });
+      });
+    }
   </script>
 </body>
 </html>
