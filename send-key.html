@@ -3,174 +3,130 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>S333 HUBS | Acesso Premium</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <title>S333 HUBS | Key Gerada</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     * {
-      box-sizing: border-box;
-      padding: 0;
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      background-color: #111;
       color: #fff;
-      height: 100vh;
       display: flex;
-      align-items: center;
       justify-content: center;
-      overflow: hidden;
+      align-items: center;
+      height: 100vh;
     }
 
-    .circle-container {
-      width: 60px;
-      height: 60px;
-      border: 6px solid rgba(255, 255, 255, 0.1);
-      border-top: 6px solid #00e676;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      position: absolute;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .container-main-key {
-      display: none;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(15px);
+    .card {
+      background: #1b1b1b;
+      padding: 40px 30px;
       border-radius: 20px;
-      padding: 40px;
-      box-shadow: 0 0 40px rgba(0,0,0,0.5);
+      box-shadow: 0 0 20px rgba(0, 255, 128, 0.15);
       text-align: center;
       width: 90%;
       max-width: 400px;
-      animation: fadeIn 1s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
     }
 
     .logo {
-      width: 150px;
+      width: 100px;
+      height: 100px;
+      border-radius: 15px;
+      object-fit: cover;
       margin-bottom: 20px;
-      filter: drop-shadow(0 0 10px #00e676aa);
+      box-shadow: 0 0 30px rgba(0, 255, 128, 0.5);
     }
 
     h1 {
-      font-size: 1.6rem;
+      font-size: 22px;
       margin-bottom: 20px;
-      font-weight: 600;
     }
 
-    .key-container {
-      display: inline-flex;
+    .key-box {
+      background: #222;
+      border: 1px solid #333;
+      padding: 12px 16px;
+      border-radius: 10px;
+      display: flex;
       align-items: center;
-      gap: 12px;
-      background: #1c1c1c;
-      border: 1px solid #2e2e2e;
-      padding: 15px 25px;
-      border-radius: 12px;
+      justify-content: center;
+      gap: 10px;
+      font-size: 14px;
+      word-break: break-all;
+      margin-bottom: 25px;
+    }
+
+    .key-box i {
+      color: #00ff99;
       cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
-    }
-
-    .key-container:hover {
-      background: #2a2a2a;
-      transform: scale(1.03);
-    }
-
-    #icon-copy {
-      color: #00e676;
-      font-size: 1.2rem;
-    }
-
-    #your-key {
-      font-size: 1.1rem;
-      font-weight: 600;
     }
 
     footer {
-      margin-top: 40px;
-      font-size: 0.85rem;
-      color: #ccc;
+      font-size: 12px;
+      color: #aaa;
     }
 
-    #alert-copy {
+    .copiado {
       position: absolute;
-      top: 30px;
-      background: #00e676;
+      top: 20px;
+      right: 20px;
+      background: #00ff99;
       color: #000;
-      padding: 8px 16px;
-      border-radius: 30px;
-      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 13px;
       opacity: 0;
-      transform: translateY(-20px);
-      transition: all 0.3s ease;
-      pointer-events: none;
+      transition: opacity 0.3s ease;
     }
 
-    #alert-copy.show {
+    .copiado.show {
       opacity: 1;
-      transform: translateY(0);
     }
   </style>
 </head>
 <body>
 
-  <div class="circle-container"></div>
+  <div class="copiado" id="copiado">Key copiada!</div>
 
-  <div class="container-main-key">
-    <main>
-      <img src="/Main logo.png" alt="S333 HUBS Logo" class="logo"/>
-      <h1>Sua key exclusiva chegou!</h1>
-      <div class="key-container" id="copy-key">
-        <i id="icon-copy" class="fa-solid fa-copy"></i>
-        <span id="your-key">Carregando...</span>
-      </div>
-    </main>
-    <footer>
-      © 2025 S333 HUBS. Todos os direitos reservados.
-    </footer>
+  <div class="card">
+    <img src="/Main logo.png" alt="Logo S333 HUBS" class="logo" />
+    <h1>Sua key exclusiva chegou!</h1>
+    <div class="key-box">
+      <i class="fa-solid fa-copy" id="copy-icon"></i>
+      <span id="your-key">Carregando...</span>
+    </div>
+    <footer>© 2025 S333 HUBS. Todos os direitos reservados.</footer>
   </div>
 
-  <div id="alert-copy">Key copiada!</div>
-
   <script>
-    const circle = document.querySelector(".circle-container");
-    const mainContainer = document.querySelector(".container-main-key");
     const keySpan = document.getElementById("your-key");
-    const copyBtn = document.getElementById("copy-key");
-    const alertCopy = document.getElementById("alert-copy");
-
-    function copiarTexto(texto) {
-      navigator.clipboard.writeText(texto).then(() => {
-        alertCopy.classList.add("show");
-        setTimeout(() => alertCopy.classList.remove("show"), 2000);
-      }).catch(err => {
-        console.error("Erro ao copiar:", err);
-      });
-    }
+    const iconCopy = document.getElementById("copy-icon");
+    const alertCopy = document.getElementById("copiado");
 
     fetch("https://script.google.com/macros/s/AKfycbyzXqI7BHsBgfH5KjlCSxlPoWBKoU7sKoVHL5HjkyqHMHH2prRmUunDRFlv4Wp955ww3g/exec")
-      .then(response => response.text())
+      .then(res => {
+        if (!res.ok) throw new Error("Erro ao gerar key");
+        return res.text();
+      })
       .then(data => {
-        circle.style.display = "none";
-        mainContainer.style.display = "block";
         keySpan.textContent = data;
       })
-      .catch(error => {
+      .catch(err => {
         keySpan.textContent = "Erro ao gerar key";
-        console.error("Erro ao buscar a key:", error);
+        console.error(err);
       });
 
-    copyBtn.addEventListener("click", () => {
-      copiarTexto(keySpan.textContent);
+    iconCopy.addEventListener("click", () => {
+      navigator.clipboard.writeText(keySpan.textContent)
+        .then(() => {
+          alertCopy.classList.add("show");
+          setTimeout(() => alertCopy.classList.remove("show"), 2000);
+        });
     });
   </script>
 </body>
