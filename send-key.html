@@ -108,14 +108,12 @@
     const sessionToken = sessionStorage.getItem("authToken");
     const tokenValido = "98764av";
 
-    // Verificação de segurança
     if (urlToken !== tokenValido || sessionToken !== tokenValido) {
       document.body.innerHTML = "<h2 style='color: white; text-align: center;'>Acesso negado. BYPASS DETECTADO, PASSE PELA KEY!</h2>";
       setTimeout(() => {
         window.location.href = "https://lokcis.vercel.app/";
       }, 2000);
     } else {
-      // Se o token for válido, carrega a key
       const keySpan = document.getElementById("your-key");
       const iconCopy = document.getElementById("copy-icon");
       const alertCopy = document.getElementById("copiado");
