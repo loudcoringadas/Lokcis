@@ -57,7 +57,7 @@
       justify-content: center;
       gap: 10px;
       font-size: 14px;
-      word-break: break-all;
+      word-break: break-word;
       margin-bottom: 25px;
     }
 
@@ -104,28 +104,24 @@
   </div>
 
   <script>
-    const token = new URLSearchParams(window.location.search).get("auth");
-    const passou = sessionStorage.getItem("passouRedirecionador");
+    const urlToken = new URLSearchParams(window.location.search).get("auth");
+    const sessionToken = sessionStorage.getItem("authToken");
     const tokenValido = "aG436GsG";
 
-    if (token !== tokenValido || passou !== "sim") {
+    // Verificação de segurança
+    if (urlToken !== tokenValido || sessionToken !== tokenValido) {
       document.body.innerHTML = "<h2 style='color: white; text-align: center;'>Acesso negado. BYPASS DETECTADO, PASSE PELA KEY!</h2>";
       setTimeout(() => {
         window.location.href = "https://lokcis.vercel.app/";
-      }, 2500);
+      }, 2000);
     } else {
+      // Se o token for válido, carrega a key
       const keySpan = document.getElementById("your-key");
       const iconCopy = document.getElementById("copy-icon");
       const alertCopy = document.getElementById("copiado");
 
-      // Oculta o token da URL
-      window.history.replaceState(null, "", window.location.pathname);
-
       fetch("https://script.google.com/macros/s/AKfycbyzXqI7BHsBgfH5KjlCSxlPoWBKoU7sKoVHL5HjkyqHMHH2prRmUunDRFlv4Wp955ww3g/exec")
-        .then(res => {
-          if (!res.ok) throw new Error("Erro ao gerar key");
-          return res.text();
-        })
+        .then(res => res.text())
         .then(data => {
           keySpan.textContent = data;
         })
