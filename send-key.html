@@ -106,7 +106,7 @@
   <script>
     const urlToken = new URLSearchParams(window.location.search).get("auth");
     const sessionToken = sessionStorage.getItem("authToken");
-    const tokenValido = "98764av";
+    const tokenValido = "abc";
 
     if (urlToken !== tokenValido || sessionToken !== tokenValido) {
       document.body.innerHTML = "<h2 style='color: white; text-align: center;'>Acesso negado. BYPASS DETECTADO, PASSE PELA KEY!</h2>";
