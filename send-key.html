@@ -108,13 +108,13 @@
     const recebido = urlParams.get("auth");
 
     // Token camuflado (igual do redirecionador)
-    const token = (() => {
-      const p1 = "Lp$@TYxNvF^CJX3MqWzR!";
-      const p2 = "9odUy#K2&XpLgMCVtJZq*";
-      const p3 = "NbEyW$6FXr%PL!T^cKMZo";
-      const p4 = "XW@9BpU7Y#F!MXrCJ^A2v";
-      const p5 = "LTZowE!pNcUyKX$FbJgC@3";
-      return p1 + p2 + p3 + p4 + p5;
+    const parte1 = "Lp$@TYxNvF^CJX3MqWzR!";
+    const parte2 = "9odUy#K2&XpLgMCVtJZq*";
+    const parte3 = "NbEyW$6FXr%PL!T^cKMZo";
+    const parte4 = "XW@9BpU7Y#F!MXrCJ^A2v";
+    const parte5 = "LTZowE!pNcUyKX$FbJgC@3";
+
+    const token = parte1 + parte2 + parte3 + parte4 + parte5;
     })();
 
     const passouRedirecionador = sessionStorage.getItem("passouRedirecionador") === "sim";
