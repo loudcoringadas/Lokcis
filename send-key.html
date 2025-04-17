@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    /* Estilo igual ao original */
     * {
       margin: 0;
       padding: 0;
@@ -58,7 +57,7 @@
       justify-content: center;
       gap: 10px;
       font-size: 14px;
-      word-break: break-all;
+      word-break: break-word;
       margin-bottom: 25px;
     }
 
@@ -106,22 +105,31 @@
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get("token");
+    const recebido = urlParams.get("auth");
+
+    // Token camuflado (igual do redirecionador)
+    const token = (() => {
+      const p1 = "Lp$@TYxNvF^CJX3MqWzR!";
+      const p2 = "9odUy#K2&XpLgMCVtJZq*";
+      const p3 = "NbEyW$6FXr%PL!T^cKMZo";
+      const p4 = "XW@9BpU7Y#F!MXrCJ^A2v";
+      const p5 = "LTZowE!pNcUyKX$FbJgC@3";
+      return p1 + p2 + p3 + p4 + p5;
+    })();
+
+    const passouRedirecionador = sessionStorage.getItem("passouRedirecionador") === "sim";
+
     const keySpan = document.getElementById("your-key");
     const iconCopy = document.getElementById("copy-icon");
     const alertCopy = document.getElementById("copiado");
-    const card = document.getElementById("card");
 
-    const tokenValido = "Lp$@TYxNvF^CJX3MqWzR!9odUy#K2&XpLgMCVtJZq*NbEyW$6FXr%PL!T^cKMZoX"; // Você pode gerar esse no redirecionador
-
-    if (token !== tokenValido) {
-      // Bloqueia acesso
+    if (!passouRedirecionador || recebido !== token) {
       document.body.innerHTML = "<h2 style='color: white; text-align: center;'>Acesso negado. BYPASS DETECTADO, PASSE PELA KEY!</h2>";
       setTimeout(() => {
         window.location.href = "https://lokcis.vercel.app/";
-      }, 2000);
+      }, 2500);
     } else {
-      // Token válido → carregar key normalmente
+      // Carregar key do endpoint
       fetch("https://script.google.com/macros/s/AKfycbyzXqI7BHsBgfH5KjlCSxlPoWBKoU7sKoVHL5HjkyqHMHH2prRmUunDRFlv4Wp955ww3g/exec")
         .then(res => {
           if (!res.ok) throw new Error("Erro ao gerar key");
