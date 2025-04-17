@@ -112,12 +112,14 @@
       document.body.innerHTML = "<h2 style='color: white; text-align: center;'>Acesso negado. BYPASS DETECTADO, PASSE PELA KEY!</h2>";
       setTimeout(() => {
         window.location.href = "https://lokcis.vercel.app/";
-      }, 2000);
+      }, 2500);
     } else {
-      // Token válido → carregar key normalmente
       const keySpan = document.getElementById("your-key");
       const iconCopy = document.getElementById("copy-icon");
       const alertCopy = document.getElementById("copiado");
+
+      // Oculta o token da URL
+      window.history.replaceState(null, "", window.location.pathname);
 
       fetch("https://script.google.com/macros/s/AKfycbyzXqI7BHsBgfH5KjlCSxlPoWBKoU7sKoVHL5HjkyqHMHH2prRmUunDRFlv4Wp955ww3g/exec")
         .then(res => {
